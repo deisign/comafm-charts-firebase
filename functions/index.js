@@ -31,7 +31,7 @@ async function doParse() {
   console.log("Parsed and stored", rows.length, "tracks.");
 }
 
-// Cron
+// Cron function
 exports.parsePlaylist = functions.pubsub
   .schedule("every day 03:00")
   .timeZone("Europe/Kyiv")
@@ -43,7 +43,7 @@ exports.manualParse = functions.https.onRequest(async (req, res) => {
   res.send("Manual parsing complete.");
 });
 
-// Chart API
+// Weekly Chart API
 exports.getWeeklyChart = functions.https.onRequest(async (req, res) => {
   const weekAgo = admin.firestore.Timestamp.fromDate(
     new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
